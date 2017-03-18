@@ -22,7 +22,7 @@ URL_MAIN = 'http://www.fullmoviz.org/'
 MOVIE_MOVIE = (URL_MAIN + '?p=movies&orderby=name', 'showMovies')
 MOVIE_NEWS = (URL_MAIN + '?p=movies&orderby=date', 'showMovies')
 MOVIE_COMMENTS = (URL_MAIN + '?p=movies&orderby=comment_count', 'showMovies')
-MOVIE_GENRES = (URL_MAIN + '', 'showGenre')
+MOVIE_GENRES = (True, 'showGenre')
 
 URL_SEARCH = (URL_MAIN + '?s=', 'showMovies')
 FUNCTION_SEARCH = 'showMovies'
