@@ -71,8 +71,8 @@ def load():
     oGui.addDir(SITE_IDENTIFIER, 'showMovies', 'Tout Les Films', 'films.png', oOutputParameterHandler)
    
     oOutputParameterHandler = cOutputParameterHandler()
-    oOutputParameterHandler.addParameter('siteUrl', 'http://venom')
-    oGui.addDir(SITE_IDENTIFIER, 'showGenre', 'Films Genre', 'genres.png', oOutputParameterHandler)
+    oOutputParameterHandler.addParameter('siteUrl', 'MOVIE_GENRES[0]')
+    oGui.addDir(SITE_IDENTIFIER, 'MOVIE_GENRES[1]', 'Films Genre', 'genres.png', oOutputParameterHandler)
     
     oOutputParameterHandler = cOutputParameterHandler()
     oOutputParameterHandler.addParameter('siteUrl', SERIE_NEWS[0])
