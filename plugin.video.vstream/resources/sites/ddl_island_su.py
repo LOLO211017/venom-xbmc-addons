@@ -18,7 +18,7 @@ PathCache = xbmc.translatePath(xbmcaddon.Addon('plugin.video.vstream').getAddonI
 UA = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; de-DE; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
 
 SITE_IDENTIFIER = 'ddl_island_su' 
-SITE_NAME = '[COLOR violet]DDL-Island[/COLOR]' 
+SITE_NAME = 'DDL-Island' 
 SITE_DESC = 'Fichier en DDL, HD' 
 
 URL_MAIN = 'http://www.ddl-island.su/'
