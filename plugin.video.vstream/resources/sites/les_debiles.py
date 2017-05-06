@@ -12,15 +12,15 @@ SITE_IDENTIFIER = 'les_debiles'
 SITE_NAME = 'Les Débiles'
 SITE_DESC = 'Vidéos drôles, du buzz, des fails et des vidéos insolites'
 
-URL_MAIN = 'http://www.lesdebiles.com'
- 
+URL_MAIN = 'http://www.lesdebiles.com/'
+
 URL_SEARCH = (URL_MAIN , 'showMovies')
 FUNCTION_SEARCH = 'showMovies'
- 
+
 MOVIE_NETS = ('http://', 'load')
-NETS_NEWS = (URL_MAIN + '/videos-s0-1.html', 'showMovies')
-NETS_GENRES = (True, 'showGenre')
- 
+NETS_NEWS = (URL_MAIN + 'videos-s0-1.html', 'showMovies')
+NETS_GENRES = (True, 'showGenres')
+
 def load(): 
     oGui = cGui() 
  
@@ -31,29 +31,29 @@ def load():
     oOutputParameterHandler = cOutputParameterHandler()
     oOutputParameterHandler.addParameter('siteUrl', NETS_GENRES[0])
     oGui.addDir(SITE_IDENTIFIER, NETS_GENRES[1], 'Vidéos Catégories', 'genres.png', oOutputParameterHandler)
-               
+
     oGui.setEndOfDirectory()
- 
+
 def showSearch():
     oGui = cGui()
  
     sSearchText = oGui.showKeyBoard() 
     if (sSearchText != False):
-        sUrl = URL_SEARCH[0] + '/' + sSearchText + '-s0-r1.html'
+        sUrl = URL_SEARCH[0] + sSearchText + '-s0-r1.html'
         showMovies(sUrl) 
         oGui.setEndOfDirectory()
         return
- 
-def showGenre():
+
+def showGenres():
     oGui = cGui()
   
     liste = []
-    liste.append( ['Nouveautés', URL_MAIN + '/videos-s0-1.html'] )
-    liste.append( ['Hit Parade', URL_MAIN + '/videos-s5-1.html'] )
-    liste.append( ['Top Vues', URL_MAIN + '/videos-s1-1.html'] )
-    liste.append( ['Top Vote', URL_MAIN + '/videos-s2-1.html'] )
-    liste.append( ['Fatality', URL_MAIN + '/videos-s7-1.html'] )
-    liste.append( ['Vidéos Longues', URL_MAIN + '/videos-s3-1.html'] )     
+    liste.append( ['Nouveautés', URL_MAIN + 'videos-s0-1.html'] )
+    liste.append( ['Hit Parade', URL_MAIN + 'videos-s5-1.html'] )
+    liste.append( ['Top Vues', URL_MAIN + 'videos-s1-1.html'] )
+    liste.append( ['Top Vote', URL_MAIN + 'videos-s2-1.html'] )
+    liste.append( ['Fatality', URL_MAIN + 'videos-s7-1.html'] )
+    liste.append( ['Vidéos Longues', URL_MAIN + 'videos-s3-1.html'] )     
                  
     for sTitle,sUrl in liste:
          
@@ -62,7 +62,7 @@ def showGenre():
         oGui.addDir(SITE_IDENTIFIER, 'showMovies', sTitle, 'genres.png', oOutputParameterHandler) 
                
     oGui.setEndOfDirectory()
-         
+
 def showMovies(sSearch = ''):
     oGui = cGui()
      
@@ -94,7 +94,7 @@ def showMovies(sSearch = ''):
 
             oOutputParameterHandler = cOutputParameterHandler()
             oOutputParameterHandler.addParameter('siteUrl', sUrl)
-            oOutputParameterHandler.addParameter('sMovieTitle', sTitle) 
+            oOutputParameterHandler.addParameter('sMovieTitle', sTitle)
             oOutputParameterHandler.addParameter('sThumbnail', sThumbnail)
             oGui.addMovie(SITE_IDENTIFIER, 'showHosters', sTitle, '', sThumbnail,'', oOutputParameterHandler)
                 
@@ -104,12 +104,11 @@ def showMovies(sSearch = ''):
         if (sNextPage != False):
             oOutputParameterHandler = cOutputParameterHandler()
             oOutputParameterHandler.addParameter('siteUrl', sNextPage)
-            oGui.addDir(SITE_IDENTIFIER, 'showMovies', '[COLOR teal]Next >>>[/COLOR]',
-                        'next.png',  oOutputParameterHandler)
+            oGui.addNext(SITE_IDENTIFIER, 'showMovies', '[COLOR teal]Next >>>[/COLOR]', oOutputParameterHandler)
  
     if not sSearch:
         oGui.setEndOfDirectory() 
- 
+
 def __checkForNextPage(sHtmlContent):
     oParser = cParser()
     sPattern = '<a href="([^"]+)">suivante</a></li>'
@@ -122,8 +121,8 @@ def __checkForNextPage(sHtmlContent):
 
 def showHosters():
     oGui = cGui()
-    oInputParameterHandler = cInputParameterHandler() 
-    sUrl = oInputParameterHandler.getValue('siteUrl') 
+    oInputParameterHandler = cInputParameterHandler()
+    sUrl = oInputParameterHandler.getValue('siteUrl')
     sMovieTitle = oInputParameterHandler.getValue('sMovieTitle')
     sThumbnail = oInputParameterHandler.getValue('sThumbnail')
      
@@ -147,14 +146,14 @@ def showHosters():
             sHosterUrl = str(aEntry)
             # Certains URL "dailymotion" sont écrits : //www.dailymotion.com
             if sHosterUrl[:4] != 'http':
-                sHosterUrl = 'http:' + sHosterUrl     
+                sHosterUrl = 'http:' + sHosterUrl
                  
             oHoster = cHosterGui().checkHoster(sHosterUrl)
             if (oHoster != False):
                 oHoster.setDisplayName(sMovieTitle)
                 oHoster.setFileName(sMovieTitle)
-                cHosterGui().showHoster(oGui, oHoster, sHosterUrl, sThumbnail) 
+                cHosterGui().showHoster(oGui, oHoster, sHosterUrl, sThumbnail)
     else:
         oGui.addText(SITE_IDENTIFIER, '(Video non visible, Lien Premium)')
-                 
+
     oGui.setEndOfDirectory()
